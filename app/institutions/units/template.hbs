@@ -1,0 +1,38 @@
+<div class="col-xs-4 col-xs-pull-8">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">
+        {{#if model.parentId}}
+          {{#link-to 'institutions.units' model.parentId}}
+            {{model.orgUnit.name}}
+          {{/link-to}}
+        {{else}}
+          {{model.orgUnit.name}}
+        {{/if}}
+      </h2>
+    </div>
+    {{#if deleteConfirmation}}
+      <div class="panel-body">
+        <div class="alert alert-danger">
+          Are you sure you want to delete {{deletingName}}? <button class="btn btn-link alert-link" {{action "willDelete"}}>Yes</button>  <button href="" class="btn btn-link alert-link" {{action "willNotDelete"}}>No</button>
+        </div>
+
+      </div>
+    {{/if}}
+    <ul class="list-group">
+
+      {{#each model.children as |unit|}}
+      <li class="list-group-item">
+        {{#link-to 'institutions.units' unit.orgUnit.id}}
+          {{unit.orgUnit.name}}
+        {{/link-to}}
+        <br>
+        {{#unless unit.children.length}}
+          <button type="button" {{action 'confirmDelete' unit.orgUnit.id unit.orgUnit.name}} class="btn btn-danger">Delete</button>
+        {{/unless}}
+      </li>
+      {{/each}}
+    </ul>
+    {{outlet}}
+  </div>
+</div>

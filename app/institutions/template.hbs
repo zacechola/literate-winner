@@ -1,0 +1,38 @@
+<div class="{{if fullWidth 'col-xs-12' 'col-xs-8 col-xs-push-4'}}">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">
+        {{#link-to 'institutions.units' model.orgUnit.id}}
+          {{model.orgUnit.name}} Tree
+        {{/link-to}}
+      </h2>
+    </div>
+    <div class="panel-body">
+      <ul>
+        <li>{{#link-to 'institutions.units' model.orgUnit.id}}{{model.orgUnit.name}}{{/link-to}}</li>
+      {{#if model.children.length}}
+        <ul>
+        {{#each model.children as |unit|}}
+        <li>{{#link-to 'institutions.units' unit.orgUnit.id}}{{unit.orgUnit.name}}{{/link-to}}</li>
+          {{#if unit.children.length}}
+            <ul>
+              {{#each unit.children as |u|}}
+              <li>{{#link-to 'institutions.units' u.orgUnit.id}}{{u.orgUnit.name}}{{/link-to}}</li>
+              {{#if u.children.length}}
+                <ul>
+                  {{#each u.children as |v|}}
+                    <li>{{#link-to 'institutions.units' v.orgUnit.id}}{{v.orgUnit.name}}{{/link-to}}</li>
+                  {{/each}}
+                </ul>
+              {{/if}}
+              {{/each}}
+            </ul>
+          {{/if}}
+        {{/each}}
+        </ul>
+      {{/if}}
+      </ul>
+    </div>
+  </div>
+</div>
+{{outlet}}

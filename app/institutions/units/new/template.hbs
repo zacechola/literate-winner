@@ -1,0 +1,14 @@
+{{#unless model.children.length}}
+  <ul class="list-group">
+    <li class="list-group-item list-group-item-warning">
+      There are no children for {{model.orgUnit.name}}. Create one with the form, below.
+    </li>
+  </ul>
+{{/unless}}
+<div class="panel-body">
+  {{input type="hidden" name="parentId" value=model.orgUnit.name class="form-control"}}
+  <div class="form-group">
+    <label class="control-label">Name</label>
+    {{input type="text" class="form-control"}}
+  </div>
+</div>
